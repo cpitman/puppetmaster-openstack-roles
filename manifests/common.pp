@@ -31,4 +31,6 @@ class role::common
     enable => false
   }
   
+  include '::ntp'
+  
 }
