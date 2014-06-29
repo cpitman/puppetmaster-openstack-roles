@@ -1,26 +1,19 @@
 class role::controller {
   class { 'mysql::server':
     root_password => "password",
-    users => {
-      'keystone@localhost' => {
-        ensure => 'present',
-        password_hash => '*2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19'
-      }
-    },
-    grants => {
-      'keystone@localhost/keystone.*' => {
-        ensure => 'present',
-        options => ['GRANT'],
-        privileges => ['ALL'],
-        table => 'keystone.*',
-        user => 'keystone@localhost'
-      }
-    },
-    databases => {
-      'keystone' => {
-        ensure => 'present'
-      }
-    }
+    mysql_module => '2.2'
   }
+  class { 'keystone::db::mysql':
+    password => 'keystone_password'
+  }
+  class { 'keystone':
+    admin_token => 'keystone',    
+    database_connection => 'mysql://keystone:keystone_password@192.168.1.5/keystone',
+    mysql_module => '2.2',
+    public_endpoint => 'http://192.168.1.5:5000/v2.0/',
+    admin_endpoint => 'http://192.168.1.5:35357/v2.0/'
+  }
+  class { 'keystone::cron::token_flush': }
+  class { 'qpid::server': }
 }
     
