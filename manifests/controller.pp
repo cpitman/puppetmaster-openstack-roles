@@ -1,10 +1,10 @@
 class role::controller {
   class { 'mysql::server':
     root_password => "password",
-    mysql_module => '2.2'
   }
   class { 'keystone::db::mysql':
-    password => 'keystone_password'
+    password => 'keystone_password',
+    mysql_module => '2.2'
   }
   class { 'keystone':
     admin_token => 'keystone',    
