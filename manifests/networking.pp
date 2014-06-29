@@ -3,4 +3,7 @@ class role::networking ($device_name, $mgmt_ip_addr, $instance_ip_addr) {
   file { "/etc/sysconfig/network-scripts/ifcfg-${device_name}":
     content => template('role/ifcfg.erb')
   }
+  ~>
+  service { "network":
+  }
 }
