@@ -27,8 +27,8 @@ class role::common
   }
   
   service { 'NetworkManager':
-    ensure => stopped,
-    enable => false
+    ensure => running,
+    enable => true
   }
   
   include '::ntp'
