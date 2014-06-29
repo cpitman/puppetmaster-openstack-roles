@@ -8,7 +8,7 @@ class role::controller {
   }
   class { 'keystone':
     admin_token => 'keystone',    
-    database_connection => 'mysql://keystone:keystone_password@192.168.1.5/keystone',
+    database_connection => 'mysql://keystone:keystone_password@localhost/keystone',
     mysql_module => '2.2',
     public_endpoint => 'http://192.168.1.5:5000/v2.0/',
     admin_endpoint => 'http://192.168.1.5:35357/v2.0/'
