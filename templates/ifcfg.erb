@@ -1,0 +1,12 @@
+TYPE="Ethernet"
+BOOTPROTO="static"
+DEVICE="<%= @device_name %>"
+ONBOOT="yes"
+HWADDR="<%= @mac_addr %>"
+IPADDR="<%= @mgmt_ip_addr %>"
+GATEWAY="192.168.1.1"
+NETMASK="255.255.255.0"
+
+IPADDR2="<%= @instance_ip_addr %>"
+NETMASK2="255.255.255.0"
+DNS1="8.8.8.8"
