@@ -3,12 +3,12 @@ class role::controller {
     root_password => "password",
   }
   class { 'keystone::db::mysql':
-    password => 'keystone_password',
+    password => 'password',
     mysql_module => '2.2'
   }
   class { 'keystone':
     admin_token => 'keystone',    
-    database_connection => 'mysql://keystone:keystone_password@localhost/keystone',
+    database_connection => 'mysql://keystone:password@localhost/keystone',
     mysql_module => '2.2',
     public_endpoint => 'http://192.168.1.5:5000/v2.0/',
     admin_endpoint => 'http://192.168.1.5:35357/v2.0/'
