@@ -67,7 +67,7 @@ class role::controller {
     qpid_hostname => 'controller'
   }
 
-  class { 'glance::cache:cleaner': }
+  class { 'glance::cache::cleaner': }
 
   class { 'glance::cache::pruner': }
 
