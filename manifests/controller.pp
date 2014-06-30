@@ -56,7 +56,7 @@ class role::controller {
   class { 'glance::registry':
     keystone_password => 'password',
     mysql_module => $mysql_module,
-    database_connection => 'mysql://glance:password@127.0.0.1/glance'
+    database_connection => 'mysql://glance:password@127.0.0.1/glance',
     auth_host => '192.168.1.5'
   }
 
