@@ -14,6 +14,10 @@ class role::controller {
     admin_endpoint => 'http://192.168.1.5:35357/v2.0/'
   }
   class { 'keystone::cron::token_flush': }
+  class { 'keystone::roles::admin': 
+    email => 'cpitman1@gmail.com',
+    password => 'password'
+  }
   class { 'qpid::server': }
 }
     
