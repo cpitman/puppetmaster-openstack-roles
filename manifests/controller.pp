@@ -18,6 +18,10 @@ class role::controller {
     email => 'cpitman1@gmail.com',
     password => 'password'
   }
+  class { 'keystone::endpoint':
+    public_url => 'http://192.168.1.5:5000',
+    admin_url => 'http://192.168.1.5:35357'
+  }
   class { 'qpid::server': }
 }
     
