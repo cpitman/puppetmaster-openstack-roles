@@ -7,7 +7,7 @@ class role::controller {
     root_password => "password",
   }
 
-  class { 'keystone::db::mysql':
+  class { ['keystone::db::mysql', 'nova::db::mysql', 'glance::db::mysql']:
     password => 'password',
     mysql_module => $mysql_module
   }
@@ -33,11 +33,6 @@ class role::controller {
   }
 
   class { 'qpid::server': }
-
-  class { 'glance::db::mysql': 
-    password => 'password',
-    mysql_module => $mysql_module
-  }
 
   class { 'glance::api':
     keystone_password => 'password',
@@ -72,5 +67,30 @@ class role::controller {
   class { 'glance::cache::pruner': }
 
   class { 'glance::backend::file': }
+  
+  class { 'nova':
+    mysql_module        => $mysql_module,
+    database_connection => 'mysql://nova:password@127.0.0.1/nova',
+    rpc_backend         => 'nova.openstack.common.rpc.impl_qpid'
+  }
+  
+  class { 'nova::api': 
+    admin_password => 'password',
+    enabled        => true
+  }
+  
+  class { ['nova::scheduler', 'nova::conductor', 'nova::cert', 'nova::vncproxy', 'nova::consoleauth']: 
+    enabled => true
+  }
+  
+  class { 'nova::client': }
+  
+  class { 'nova::keystone::auth':
+    password => 'password',
+    public_address => '192.168.1.5',
+    admin_address => '192.168.1.5',
+    internal_address => '192.168.1.5'
+  }
+  
 }
     
